@@ -1,0 +1,10 @@
+.imgContainer {
+  align-self: anchor-center;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+}
