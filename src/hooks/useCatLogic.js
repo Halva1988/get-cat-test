@@ -9,6 +9,7 @@ export const useCatLogic = () => {
 	const [isChecked, setIsChecked] = useState(false);
 	const [isAutoRefresh, setIsAutoRefresh] = useState(false);
 	const [catImage, setCatImage] = useState(null);
+	const [catDescription, setCatDescription] = useState(null);
 
 	const handleEnableChange = useCallback((e) => {
 		setIsChecked(e.target.checked);
@@ -29,6 +30,7 @@ export const useCatLogic = () => {
 				},
 			});
 			if (response.data && response.data.length > 0) {
+				setCatDescription(response.data[0].breeds[0].description);
 				setCatImage(response.data[0].url);
 			}
 		} catch (error) {
@@ -50,6 +52,7 @@ export const useCatLogic = () => {
 		isChecked,
 		isAutoRefresh,
 		catImage,
+		catDescription,
 		handleEnableChange,
 		handleAutoRefreshChange,
 		fetchCatImage,

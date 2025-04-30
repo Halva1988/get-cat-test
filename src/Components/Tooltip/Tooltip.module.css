@@ -1,0 +1,29 @@
+.description {
+	position: absolute;
+	width: 150%;
+	top: 400px;
+	padding: 10px;
+	border-radius: 8px;
+	background: radial-gradient(100% 100% at 100% 0%, #89e5ff, #5468ff);
+
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: 1s;
+
+	@starting-style {
+		opacity: 0;
+	}
+}
+
+.description::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #45b1ce;
+}
