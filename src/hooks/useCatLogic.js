@@ -10,6 +10,16 @@ export const useCatLogic = () => {
 	const [isAutoRefresh, setIsAutoRefresh] = useState(false);
 	const [catImage, setCatImage] = useState(null);
 	const [catDescription, setCatDescription] = useState(null);
+	const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+	const [wikiUrl, setWikiUrl] = useState(null);
+
+	const handleMouseEnter = useCallback(() => {
+		setIsTooltipVisible(true);
+	}, []);
+
+	const handleMouseLeave = useCallback(() => {
+		setIsTooltipVisible(false);
+	}, []);
 
 	const handleEnableChange = useCallback((e) => {
 		setIsChecked(e.target.checked);
@@ -30,6 +40,9 @@ export const useCatLogic = () => {
 				},
 			});
 			if (response.data && response.data.length > 0) {
+				console.log(response.data[0]);
+				
+				setWikiUrl(response.data[0].breeds[0].wikipedia_url);
 				setCatDescription(response.data[0].breeds[0].description);
 				setCatImage(response.data[0].url);
 			}
@@ -48,7 +61,7 @@ export const useCatLogic = () => {
 		}
 	}, [isAutoRefresh, isChecked, fetchCatImage]);
 
-  return {
+	return {
 		isChecked,
 		isAutoRefresh,
 		catImage,
@@ -56,5 +69,9 @@ export const useCatLogic = () => {
 		handleEnableChange,
 		handleAutoRefreshChange,
 		fetchCatImage,
+		handleMouseEnter,
+		handleMouseLeave,
+		isTooltipVisible,
+		wikiUrl,
 	};
 };

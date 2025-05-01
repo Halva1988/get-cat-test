@@ -1,10 +1,14 @@
+import { memo } from "react";
 import Cat from "../../assets/cat.jpg";
 import styles from "./ImageCat.module.css";
-const ImageCat = ({ catImage }) => {
+
+const ImageCat = ({ catImage, wikiUrl }) => {
 	return (
 		<div className={styles.imgContainer}>
 			{catImage ? (
-				<img src={catImage} alt="Cat" />
+				<a href={wikiUrl} target="_blank" rel="noopener noreferrer">
+					<img src={catImage} alt="Cat" className={styles.cat} />
+				</a>
 			) : (
 				<img src={Cat} alt="Default Cat" />
 			)}
@@ -12,4 +16,4 @@ const ImageCat = ({ catImage }) => {
 	);
 };
 
-export default ImageCat;
+export default memo(ImageCat);

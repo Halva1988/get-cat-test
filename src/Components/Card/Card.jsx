@@ -4,7 +4,6 @@ import Button from "../Button/Button";
 import ImageCat from "../ImageCat/ImageCat";
 import { useCatLogic } from "../../hooks/useCatLogic";
 import Tooltip from "../Tooltip/Tooltip";
-import { useState } from "react";
 
 const Card = () => {
 	const {
@@ -15,16 +14,11 @@ const Card = () => {
 		handleEnableChange,
 		handleAutoRefreshChange,
 		fetchCatImage,
+		handleMouseEnter,
+		handleMouseLeave,
+		isTooltipVisible,
+		wikiUrl,
 	} = useCatLogic();
-	const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-
-	const handleMouseEnter = () => {
-		setIsTooltipVisible(true);
-	};
-
-	const handleMouseLeave = () => {
-		setIsTooltipVisible(false);
-	};
 
 	return (
 		<div className={styles.card}>
@@ -46,7 +40,7 @@ const Card = () => {
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 			>
-				<ImageCat catImage={catImage} />
+				<ImageCat catImage={catImage} wikiUrl={wikiUrl} />
 				{isTooltipVisible && catDescription && (
 					<Tooltip catDescription={catDescription} />
 				)}
