@@ -3,7 +3,7 @@ import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const url =
-	"https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1";
+	"https://api.thecatapi.com/v1/images/search?size=small&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1";
 
 export const useCatLogic = () => {
 	const [isChecked, setIsChecked] = useState(false);
