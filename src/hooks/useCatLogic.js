@@ -40,11 +40,20 @@ export const useCatLogic = () => {
 				},
 			});
 			if (response.data && response.data.length > 0) {
-				console.log(response.data[0]);
-				
-				setWikiUrl(response.data[0].breeds[0].wikipedia_url);
-				setCatDescription(response.data[0].breeds[0].description);
-				setCatImage(response.data[0].url);
+				const newImageUrl = response.data[0].url;
+				const newWikiUrl = response.data[0].breeds[0]?.wikipedia_url;
+				const newDescription = response.data[0].breeds[0]?.description;
+
+				await new Promise((resolve, reject) => {
+					const img = new Image();
+					img.onload = resolve;
+					img.onerror = reject;
+					img.src = newImageUrl;
+				});
+
+				setCatImage(newImageUrl);
+				setWikiUrl(newWikiUrl);
+				setCatDescription(newDescription);
 			}
 		} catch (error) {
 			console.error("Error fetching cat image:", error);
@@ -53,11 +62,20 @@ export const useCatLogic = () => {
 
 	useEffect(() => {
 		if (isAutoRefresh && isChecked) {
-			const interval = setInterval(() => {
-				fetchCatImage();
-			}, 5000);
+			let isCancelled = false;
 
-			return () => clearInterval(interval);
+			const fetchWithDelay = async () => {
+				while (!isCancelled) {
+					await fetchCatImage();
+					await new Promise((resolve) => setTimeout(resolve, 5000));
+				}
+			};
+
+			fetchWithDelay();
+
+			return () => {
+				isCancelled = true;
+			};
 		}
 	}, [isAutoRefresh, isChecked, fetchCatImage]);
 
