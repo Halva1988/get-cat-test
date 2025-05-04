@@ -12,6 +12,7 @@ export const useCatLogic = () => {
 	const [catDescription, setCatDescription] = useState(null);
 	const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 	const [wikiUrl, setWikiUrl] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleMouseEnter = useCallback(() => {
 		setIsTooltipVisible(true);
@@ -34,6 +35,7 @@ export const useCatLogic = () => {
 			return;
 		}
 		try {
+			setIsLoading(true);
 			const response = await axios.get(url, {
 				headers: {
 					"x-api-key": API_KEY,
@@ -50,7 +52,8 @@ export const useCatLogic = () => {
 					img.onerror = reject;
 					img.src = newImageUrl;
 				});
-
+				
+				setIsLoading(false);
 				setCatImage(newImageUrl);
 				setWikiUrl(newWikiUrl);
 				setCatDescription(newDescription);
@@ -91,5 +94,6 @@ export const useCatLogic = () => {
 		handleMouseLeave,
 		isTooltipVisible,
 		wikiUrl,
+		isLoading
 	};
 };

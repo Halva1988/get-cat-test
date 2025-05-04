@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import ImageCat from "../ImageCat/ImageCat";
 import { useCatLogic } from "../../hooks/useCatLogic";
 import Tooltip from "../Tooltip/Tooltip";
+import Loader from "../Loader/Loader";
 
 const Card = () => {
 	const {
@@ -18,6 +19,7 @@ const Card = () => {
 		handleMouseLeave,
 		isTooltipVisible,
 		wikiUrl,
+		isLoading,
 	} = useCatLogic();
 
 	return (
@@ -40,6 +42,7 @@ const Card = () => {
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 			>
+				{isLoading && <Loader />}
 				<ImageCat catImage={catImage} wikiUrl={wikiUrl} />
 				{isTooltipVisible && catDescription && (
 					<Tooltip catDescription={catDescription} />
