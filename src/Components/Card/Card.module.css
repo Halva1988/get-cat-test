@@ -22,6 +22,12 @@
 	gap: 20px;
 }
 
+.fetchWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .bottom {
 	display: flex;
 	flex-direction: column;

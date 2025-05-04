@@ -52,14 +52,15 @@ export const useCatLogic = () => {
 					img.onerror = reject;
 					img.src = newImageUrl;
 				});
-				
-				setIsLoading(false);
+
 				setCatImage(newImageUrl);
 				setWikiUrl(newWikiUrl);
 				setCatDescription(newDescription);
 			}
 		} catch (error) {
 			console.error("Error fetching cat image:", error);
+		} finally {
+			setIsLoading(false);
 		}
 	}, [isChecked]);
 
@@ -94,6 +95,6 @@ export const useCatLogic = () => {
 		handleMouseLeave,
 		isTooltipVisible,
 		wikiUrl,
-		isLoading
+		isLoading,
 	};
 };

@@ -35,14 +35,16 @@ const Card = () => {
 					checked={isAutoRefresh}
 					onChange={handleAutoRefreshChange}
 				/>
-				<Button label="Get Cat" onClick={fetchCatImage} />
+				<div className={styles.fetchWrapper}>
+					<Button label="Get Cat" onClick={fetchCatImage} />
+					{isLoading && <Loader />}
+				</div>
 			</div>
 			<div
 				className={styles.bottom}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 			>
-				{isLoading && <Loader />}
 				<ImageCat catImage={catImage} wikiUrl={wikiUrl} />
 				{isTooltipVisible && catDescription && (
 					<Tooltip catDescription={catDescription} />
