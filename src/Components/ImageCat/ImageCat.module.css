@@ -3,13 +3,4 @@ img {
 	height: auto;
 	max-height: 200px;
 	object-fit: contain;
-	box-shadow: 0 4px 8px 6px #00000047;
-}
-
-.cat {
-	transition: transform 0.3s ease-in-out;
-
-	&:hover {
-		transform: scale(1.05);
-	}
 }

@@ -7,7 +7,7 @@ const ImageCat = ({ catImage, wikiUrl }) => {
 		<div className={styles.imgContainer}>
 			{catImage ? (
 				<a href={wikiUrl} target="_blank" rel="noopener noreferrer">
-					<img src={catImage} alt="Cat" className={styles.cat} />
+					<img src={catImage} alt="Cat" />
 				</a>
 			) : (
 				<img src={Cat} alt="Default Cat" />
