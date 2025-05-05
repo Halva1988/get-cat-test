@@ -3,23 +3,15 @@ import Checkbox from "../Checkbox/Checkbox";
 import Button from "../Button/Button";
 import ImageCat from "../ImageCat/ImageCat";
 import { useCatLogic } from "../../hooks/useCatLogic";
-import Tooltip from "../Tooltip/Tooltip";
-import Loader from "../Loader/Loader";
 
 const Card = () => {
 	const {
 		isChecked,
 		isAutoRefresh,
 		catImage,
-		catDescription,
 		handleEnableChange,
 		handleAutoRefreshChange,
 		fetchCatImage,
-		handleMouseEnter,
-		handleMouseLeave,
-		isTooltipVisible,
-		wikiUrl,
-		isLoading,
 	} = useCatLogic();
 
 	return (
@@ -37,18 +29,12 @@ const Card = () => {
 				/>
 				<div className={styles.fetchWrapper}>
 					<Button label="Get Cat" onClick={fetchCatImage} />
-					{isLoading && <Loader />}
 				</div>
 			</div>
 			<div
 				className={styles.bottom}
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
 			>
-				<ImageCat catImage={catImage} wikiUrl={wikiUrl} />
-				{isTooltipVisible && catDescription && (
-					<Tooltip catDescription={catDescription} />
-				)}
+				<ImageCat catImage={catImage} />
 			</div>
 		</div>
 	);
